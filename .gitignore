@@ -254,3 +254,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 *.sql
+/.vs/CompanyEmployees/v17
