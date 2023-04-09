@@ -11,4 +11,8 @@
     <Folder Include="Extensions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LoggerServices\LoggerServices.csproj" />
+  </ItemGroup>
+
 </Project>

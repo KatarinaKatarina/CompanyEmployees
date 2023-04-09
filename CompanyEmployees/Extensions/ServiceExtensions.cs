@@ -1,4 +1,7 @@
-﻿namespace CompanyEmployees.Extensions
+﻿using Contracts;
+using LoggerServices;
+
+namespace CompanyEmployees.Extensions
 {
     public static class ServiceExtensions //is this in use now? Shouldn't it be called in Program.cs
     {
@@ -14,8 +17,11 @@
         public static void ConfigureIisIntegration(this IServiceCollection services) =>
             services.Configure<IISOptions>(options =>
             {
-               // We do not initialize any of the properties inside the options because we are fine with the default values for now.
+                // We do not initialize any of the properties inside the options because we are fine with the default values for now.
             });
+
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+            services.AddSingleton<ILoggerManager, LoggerManager>();
 
     }
 }

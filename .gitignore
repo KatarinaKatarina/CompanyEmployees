@@ -255,3 +255,4 @@ ModelManifest.xml
 .fake/
 *.sql
 /.vs/CompanyEmployees/v17
+/.vs

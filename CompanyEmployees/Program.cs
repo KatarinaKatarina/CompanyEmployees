@@ -1,5 +1,6 @@
 using CompanyEmployees.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using NLog;
 
 
 /* 
@@ -21,9 +22,14 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//add logger
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
 // Add services to the container.    = ConfigureServices method in .Net 5 (add services)
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIisIntegration();
+builder.Services.ConfigureLoggerService();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
