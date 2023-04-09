@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Katarina\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj": {}
+    "C:\\Users\\KatarinaIvanic\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployeesDotNetApp\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Katarina\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj": {
+    "C:\\Users\\KatarinaIvanic\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployeesDotNetApp\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Katarina\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj",
+        "projectUniqueName": "C:\\Users\\KatarinaIvanic\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployeesDotNetApp\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj",
         "projectName": "CompanyEmployees",
-        "projectPath": "C:\\Users\\Katarina\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj",
-        "packagesPath": "C:\\Users\\Katarina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Katarina\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployees\\CompanyEmployees\\obj\\",
+        "projectPath": "C:\\Users\\KatarinaIvanic\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployeesDotNetApp\\CompanyEmployees\\CompanyEmployees\\CompanyEmployees.csproj",
+        "packagesPath": "C:\\Users\\KatarinaIvanic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KatarinaIvanic\\Desktop\\Personal\\CodeMaze\\Projects\\CompanyEmployeesDotNetApp\\CompanyEmployees\\CompanyEmployees\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Katarina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\KatarinaIvanic\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

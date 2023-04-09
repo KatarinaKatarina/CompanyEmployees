@@ -7,8 +7,15 @@
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 builder.AllowAnyOrigin() //WithOrigin("http://frontend-app.com")
-                .AllowAnyMethod() //WithMethods ("POST","GET") only this tpe of methods for example
+                .AllowAnyMethod() //WithMethods ("POST","GET") only this type of methods for example
                 .AllowAnyHeader()); //WithHeaders("content-type") etc.
             });
+
+        public static void ConfigureIisIntegration(this IServiceCollection services) =>
+            services.Configure<IISOptions>(options =>
+            {
+               // We do not initialize any of the properties inside the options because we are fine with the default values for now.
+            });
+
     }
 }
