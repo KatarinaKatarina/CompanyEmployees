@@ -256,3 +256,4 @@ ModelManifest.xml
 *.sql
 /.vs/CompanyEmployees/v17
 /.vs
+obj
