@@ -257,3 +257,4 @@ ModelManifest.xml
 /.vs/CompanyEmployees/v17
 /.vs
 obj
+/CompanyEmployees/internal_logs/internallog.txt
