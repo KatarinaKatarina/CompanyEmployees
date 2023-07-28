@@ -4,7 +4,7 @@ using Repository;
 
 namespace CompanyEmployees.ContextFactory
 {
-    public class RepositoryContextFactory : IDesignTimeDbContextFactory<RepositoryContext>
+    public class RepositoryContextFactory : IDesignTimeDbContextFactory<RepositoryContext> //interface that allows design-time services to discover implementations
     {
         public RepositoryContext CreateDbContext(string[] args)
         {
@@ -14,7 +14,8 @@ namespace CompanyEmployees.ContextFactory
                 .Build();
             
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
-                .UseSqlServer(configuration.GetConnectionString("sqlConnection")); //uses the ConnectionStrings name from the appsettings.json file to fetch the connection string
+                .UseSqlServer(configuration.GetConnectionString("sqlConnection"), //uses the ConnectionStrings name from the appsettings.json file to fetch the connection string
+                    bldr =>bldr.MigrationsAssembly("CompanyEmployees") ); //specifies the migration assembly
 
 
             return new RepositoryContext(builder.Options);
