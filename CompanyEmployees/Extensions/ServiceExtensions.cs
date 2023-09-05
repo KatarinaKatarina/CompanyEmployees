@@ -1,10 +1,12 @@
 ﻿using Contracts;
 using LoggerServices;
 using Repository;
+using Service;
+using Service.Contracts;
 
 namespace CompanyEmployees.Extensions
 {
-    public static class ServiceExtensions //is this in use now? Shouldn't it be called in Program.cs
+    public static class ServiceExtensions
     {
         public static void ConfigureCors(this IServiceCollection services) =>
             services.AddCors(options =>
@@ -26,5 +28,8 @@ namespace CompanyEmployees.Extensions
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static void ConfigureServiceManager(this IServiceCollection services) =>
+            services.AddScoped<IServiceManager, ServiceManager>();
+
     }
 }
