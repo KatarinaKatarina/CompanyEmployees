@@ -30,6 +30,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIisIntegration();
 builder.Services.ConfigureLoggerService();
 
+builder.Services.ConfigureRepositoryManager();
 builder.Services.AddControllers();
 
 var app = builder.Build();
