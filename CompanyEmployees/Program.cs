@@ -1,5 +1,6 @@
 using CompanyEmployees.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Routing;
 using NLog;
 
 
@@ -34,7 +35,7 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
 
 var app = builder.Build();
 
@@ -51,7 +52,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllers(); //or app.UseRouting() for default routing
 
 app.Run();
 
