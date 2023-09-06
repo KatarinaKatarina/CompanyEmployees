@@ -36,6 +36,7 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 
 builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
