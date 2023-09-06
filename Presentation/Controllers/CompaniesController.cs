@@ -13,15 +13,8 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult GetCompanies() //IActionResult returns retVal + status code
         {
-            try
-            {
-                var companies = _service.CompanyService.GetAllCompanies(trackChanges: false);
-                return Ok(companies);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            var companies = _service.CompanyService.GetAllCompanies(trackChanges: false);
+            return Ok(companies);
         }
     }
 }

@@ -1,6 +1,6 @@
 using CompanyEmployees.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Routing;
 using NLog;
 
 
@@ -38,13 +38,16 @@ builder.Services.ConfigureServiceManager();
 builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
 builder.Services.AddAutoMapper(typeof(Program));
 
-var app = builder.Build();
-
 // Configure the HTTP request pipeline.     = Configure method in .Net 5 (add middlewares)
-if (app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else
+var app = builder.Build();// builder.Build() - builds the WebApplication and registers all the services added with IOC.
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+
+app.ConfigureExceptionHandler(logger);
+if (app.Environment.IsProduction())
+{
     app.UseHsts();// adds the Strict-Transport-Security header
+}
+
 app.UseHttpsRedirection();//adding middleware for http -->https redirection
 app.UseStaticFiles(); //enables using static files for the request. If we don’t set a path to the static files directory, it will use a wwwroot folder in our project by defaul
 app.UseForwardedHeaders(new ForwardedHeadersOptions
