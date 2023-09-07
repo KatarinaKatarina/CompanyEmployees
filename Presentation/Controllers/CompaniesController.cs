@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
-using Shared;
+using Shared.DataTransferObjects;
 
 namespace Presentation.Controllers
 {
@@ -27,7 +27,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCompany([FromBody] CompanyForCreationDto? company)
+        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
         {
             if (company is null)
                 return BadRequest("CompanyForCreationDto object is null");

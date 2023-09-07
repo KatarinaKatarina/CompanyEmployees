@@ -1,6 +1,7 @@
 using CompanyEmployees.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using NLog;
 
 
@@ -35,6 +36,10 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true; // suppress default error messages that [ApiController] produces
+});
 builder.Services.AddControllers(config =>
     {
         config.RespectBrowserAcceptHeader = true;//allow header instruction about formatting
