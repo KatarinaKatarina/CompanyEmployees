@@ -35,8 +35,13 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllers(config => { config.RespectBrowserAcceptHeader = true; }) //allow header instruction about formatting
+builder.Services.AddControllers(config =>
+    {
+        config.RespectBrowserAcceptHeader = true;//allow header instruction about formatting
+        config.ReturnHttpNotAcceptable = true; //restrict using not supported content types --> return status 406
+    }) 
     .AddXmlDataContractSerializerFormatters() //allow xml formatting
+    .AddCustomCsvFormatter() //allow custom csv formatting
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
 
 
