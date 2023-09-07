@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entities.Models;
+using Shared;
 using Shared.DataTransferObjects;
 using Shared.DataTransferObjects.Shared.DataTransferObjects;
 
@@ -13,6 +14,7 @@ namespace CompanyEmployees
                 .ForMember(companyDto => companyDto.FullAddress, opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
 
             CreateMap<Employee, EmployeeDto>();
+            CreateMap<CompanyForCreationDto, Company>();
         }
 
         //CreateMap method - specify the source object and the destination object to map to.
