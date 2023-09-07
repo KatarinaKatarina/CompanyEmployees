@@ -24,6 +24,7 @@ namespace CompanyEmployees.Extensions
                         //exception type is NotFoundException, else Status500InternalServerError
                         {
                             NotFoundException => StatusCodes.Status404NotFound,
+                            BadRequestException => StatusCodes.Status400BadRequest,
                             _ => StatusCodes.Status500InternalServerError
                         };
 

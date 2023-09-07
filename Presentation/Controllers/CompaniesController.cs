@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.ModelBinders;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -19,7 +20,7 @@ namespace Presentation.Controllers
             return Ok(companies);
         }
 
-        [HttpGet("{id:guid}", Name = "CompanyById")] //setting the name for the action.
+        [HttpGet("{id:guid}", Name = "CompanyById")] //setting the name for the action
         public IActionResult GetCompany(Guid id)
         {
             var company = _service.CompanyService.GetCompany(id, trackChanges: false);
@@ -35,6 +36,20 @@ namespace Presentation.Controllers
             var createdCompany = _service.CompanyService.CreateCompany(company);
             return CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany);
             // CreatedAtRoute - create status code 204 + newly created object + Location attribute in header with URI of the new entity (if there is an actionName set like on the line 14)
+        }
+
+        [HttpGet("collection/({ids})", Name = "CompanyCollection")]
+        public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
+        {
+            var companies = _service.CompanyService.GetByIds(ids.ToList(), trackChanges: false);
+            return Ok(companies);
+        }
+
+        [HttpPost("collection")]
+        public IActionResult CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
+        {
+            var result = _service.CompanyService.CreateCompanyCollection(companyCollection);
+            return CreatedAtRoute("CompanyCollection", new { result.ids }, result.companies);
         }
     }
 }
