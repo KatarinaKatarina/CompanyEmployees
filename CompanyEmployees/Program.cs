@@ -30,13 +30,15 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nl
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIisIntegration();
 builder.Services.ConfigureLoggerService();
-
-builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-
-builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
+builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddControllers(config => { config.RespectBrowserAcceptHeader = true; }) //allow header instruction about formatting
+    .AddXmlDataContractSerializerFormatters() //allow xml formatting
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
+
 
 // Configure the HTTP request pipeline.     = Configure method in .Net 5 (add middlewares)
 var app = builder.Build();// builder.Build() - builds the WebApplication and registers all the services added with IOC.
