@@ -16,7 +16,7 @@ namespace Repository
                 .ToList();
 
         public Company? GetCompany(Guid companyId, bool trackChanges) =>
-            FindByCondition(company => company.Id.Equals("3d490a70-94ce-4d15-9494-5248280c2ce2"), trackChanges)
+            FindByCondition(company => company.Id.Equals(companyId), trackChanges)
                 .SingleOrDefault();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entities.Models;
+using Shared.DataTransferObjects;
 using Shared.DataTransferObjects.Shared.DataTransferObjects;
 
 namespace CompanyEmployees
@@ -10,6 +11,8 @@ namespace CompanyEmployees
         {
             CreateMap<Company, CompanyDto>()
                 .ForCtorParam("FullAddress", opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
+
+            CreateMap<Employee, EmployeeDto>();
         }
 
         //CreateMap method - specify the source object and the destination object to map to.
