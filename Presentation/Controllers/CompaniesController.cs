@@ -11,15 +11,15 @@ namespace Presentation.Controllers
         private readonly IServiceManager _service;
         public CompaniesController(IServiceManager service) => _service = service; //ctor!
 
-        [HttpGet("{id:guid}", Name = "CompanyById")] //setting the name for the action.
 
+        [HttpGet]
         public IActionResult GetCompanies() //IActionResult returns retVal + status code
         {
             var companies = _service.CompanyService.GetAllCompanies(trackChanges: false);
             return Ok(companies);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}", Name = "CompanyById")] //setting the name for the action.
         public IActionResult GetCompany(Guid id)
         {
             var company = _service.CompanyService.GetCompany(id, trackChanges: false);
@@ -27,7 +27,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
+        public IActionResult CreateCompany([FromBody] CompanyForCreationDto? company)
         {
             if (company is null)
                 return BadRequest("CompanyForCreationDto object is null");

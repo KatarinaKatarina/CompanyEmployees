@@ -14,6 +14,7 @@ namespace CompanyEmployees
 
             CreateMap<Employee, EmployeeDto>();
             CreateMap<CompanyForCreationDto, Company>();
+            CreateMap<EmployeeForCreationDto, Employee>();
         }
 
         //CreateMap method - specify the source object and the destination object to map to.
