@@ -33,7 +33,7 @@ namespace Service
         public CompanyDto GetCompany(Guid id, bool trackChanges)
         {
             var company = _repository.Company.GetCompany(id, trackChanges);
-            
+
             if (company is null)
                 throw new CompanyNotFoundException(id);
 
@@ -44,10 +44,10 @@ namespace Service
         public CompanyDto CreateCompany(CompanyForCreationDto? company)
         {
             var companyEntity = _mapper.Map<Company>(company);
-            
+
             _repository.Company.CreateCompany(companyEntity);
             _repository.Save();
-           
+
             var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
             return companyToReturn;
         }
@@ -72,7 +72,7 @@ namespace Service
                 throw new CompanyCollectionBadRequest();
 
             var companyEntities = _mapper.Map<IEnumerable<Company>>(companyCollection);
-            
+
             foreach (var company in companyEntities)
             {
                 _repository.Company.CreateCompany(company);
@@ -81,8 +81,19 @@ namespace Service
 
             var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities).ToList();
             var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
-            
+
             return (companies: companyCollectionToReturn, ids: ids);
+        }
+
+
+        public void DeleteCompany(Guid companyId, bool trackChanges)
+        {
+            var company = _repository.Company.GetCompany(companyId, trackChanges);
+            if (company is null)
+                throw new CompanyNotFoundException(companyId);
+
+            _repository.Company.DeleteCompany(company);
+            _repository.Save();
         }
     }
 }

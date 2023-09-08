@@ -25,6 +25,6 @@ namespace Repository
             FindByCondition(company => ids.Contains(company.Id), trackChanges)
                 .ToList();
 
-
+        public void DeleteCompany(Company company) => Delete(company);
     }
 }
