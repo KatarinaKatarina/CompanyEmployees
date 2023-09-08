@@ -2,8 +2,9 @@ using CompanyEmployees.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.Options;
 using NLog;
-
 
 /* 
  The WebApplicationBuilder class is responsible for:
@@ -17,8 +18,6 @@ using NLog;
  There is no the Startup class with two familiar methods: ConfigureServices and Configure,
  so we can do that right below the builder variable declaration (in Program.cs)
 */
-
-
 
 
 
@@ -42,15 +41,16 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 builder.Services.AddControllers(config =>
     {
-        config.RespectBrowserAcceptHeader = true;//allow header instruction about formatting
+        config.RespectBrowserAcceptHeader = true;//allows header instruction about formatting
         config.ReturnHttpNotAcceptable = true; //restrict using not supported content types --> return status 406
-    }) 
+        config.InputFormatters.Insert(0, GetJsonPatchInputFormatter()); //allows patch method
+    })
     .AddXmlDataContractSerializerFormatters() //allow xml formatting
     .AddCustomCsvFormatter() //allow custom csv formatting
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
 
 
-// Configure the HTTP request pipeline.     = Configure method in .Net 5 (add middlewares)
+// Configure the HTTP request pipeline.     = Configure method in .Net 5 (add middleware)
 var app = builder.Build();// builder.Build() - builds the WebApplication and registers all the services added with IOC.
 var logger = app.Services.GetRequiredService<ILoggerManager>();
 
@@ -69,6 +69,12 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers(); //or app.UseRouting() for default routing
+
+NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
+    new ServiceCollection().AddLogging().AddMvc().AddNewtonsoftJson()
+        .Services.BuildServiceProvider()
+        .GetRequiredService<IOptions<MvcOptions>>().Value.InputFormatters
+        .OfType<NewtonsoftJsonPatchInputFormatter>().First();
 
 app.Run();
 
