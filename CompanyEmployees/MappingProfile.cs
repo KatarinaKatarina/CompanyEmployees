@@ -5,7 +5,7 @@ using Shared.DataTransferObjects.Shared.DataTransferObjects;
 
 namespace CompanyEmployees
 {
-    public class MappingProfile : Profile //Profile is Automapper class
+    public class MappingProfile : Profile //Profile is AutoMapper class
     {
         public MappingProfile()
         {
@@ -15,6 +15,8 @@ namespace CompanyEmployees
             CreateMap<Employee, EmployeeDto>();
             CreateMap<CompanyForCreationDto, Company>();
             CreateMap<EmployeeForCreationDto, Employee>();
+            CreateMap<EmployeeForUpdateDto, Employee>();
+            CreateMap<CompanyForUpdateDto, Company>();
         }
 
         //CreateMap method - specify the source object and the destination object to map to.
