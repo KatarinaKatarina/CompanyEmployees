@@ -32,6 +32,13 @@ namespace Presentation.Controllers
             if (employee is null)
                 return BadRequest("EmployeeForCreationDto object is null");
 
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Additional error msg", "Error Message");
+                return UnprocessableEntity(ModelState);
+            }
+                
+
             var employeeToReturn = _service.EmployeeService.CreateEmployeeForCompany(companyId, employee, trackChanges: false);
 
             return CreatedAtRoute("GetEmployeeForCompany", new
