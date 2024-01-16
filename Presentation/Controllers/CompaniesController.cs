@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
 using Presentation.ModelBinders;
 using Service.Contracts;
 using Shared.DataTransferObjects;
@@ -28,11 +29,9 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto? company)
         {
-            if (company is null)
-                return BadRequest("CompanyForCreationDto object is null");
-
             var createdCompany = await _service.CompanyService.CreateCompany(company);
             return CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany);
             // CreatedAtRoute - create status code 204 + newly created object + Location attribute in header with URI of the new entity (if there is an actionName set like on the line 14)
@@ -46,6 +45,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("collection")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
         {
             var result = await _service.CompanyService.CreateCompanyCollectionAsync(companyCollection);
@@ -60,11 +60,9 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] CompanyForUpdateDto company)
         {
-            if (company is null)
-                return BadRequest("CompanyForUpdateDto object is null");
-
             await _service.CompanyService.UpdateCompanyAsync(id, company, trackChanges: true);
             return NoContent();
         }

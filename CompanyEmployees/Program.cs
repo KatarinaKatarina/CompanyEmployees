@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
+using Presentation.ActionFilters;
 
 /* 
  The WebApplicationBuilder class is responsible for:
@@ -39,6 +40,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true; // suppress default error messages that [ApiController] produces
 });
+
+builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddControllers(config =>
     {
         config.RespectBrowserAcceptHeader = true;//allows header instruction about formatting
