@@ -16,7 +16,8 @@ namespace CompanyEmployees.Extensions
                 options.AddPolicy("CorsPolicy", builder =>
                 builder.AllowAnyOrigin() //WithOrigin("http://frontend-app.com")
                 .AllowAnyMethod() //WithMethods ("POST","GET") only this type of methods for example
-                .AllowAnyHeader()); //WithHeaders("content-type") etc.
+                .AllowAnyHeader() //WithHeaders("content-type") etc.
+                .WithExposedHeaders("X-Pagination"));
             });
 
         public static void ConfigureIisIntegration(this IServiceCollection services) =>
