@@ -12,13 +12,13 @@ namespace Repository
         {
         }
 
-        public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId,
-            EmployeeParameters employeeParameters, bool trackChanges)
+        public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
         {
-            var employees = await FindByCondition(employee => employee.CompanyId.Equals(companyId), trackChanges)
+            var employees = await FindByCondition(employee => employee.CompanyId.Equals(companyId)
+                && (employee.Age >= employeeParameters.MinAge && employee.Age <= employeeParameters.MaxAge), trackChanges)
                 .OrderBy(employee => employee.Name)
                 .ToListAsync();
-            
+
             //for bigger systems, pull only needed data, and send new query for counting
             /* var employees = await FindByCondition(e => e.CompanyId.Equals(companyId), trackChanges)
                 .OrderBy(e => e.Name)
