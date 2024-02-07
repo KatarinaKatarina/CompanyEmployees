@@ -18,7 +18,7 @@ namespace Repository
             var employees = await FindByCondition(employee => employee.CompanyId.Equals(companyId), trackChanges)
                 .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
                 .Search(employeeParameters.SearchTerm)
-                .OrderBy(employee => employee.Name)
+                .Sort(employeeParameters.OrderBy)
                 .ToListAsync();
 
             //for bigger systems, pull only needed data, and send new query for counting
