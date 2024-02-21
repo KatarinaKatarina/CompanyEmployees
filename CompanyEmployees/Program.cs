@@ -1,4 +1,5 @@
 using CompanyEmployees.Extensions;
+using CompanyEmployees.Utility;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
+builder.Services.AddScoped<ValidateMediaTypeAttribute>();
+builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 builder.Services.AddControllers(config =>
     {
         config.RespectBrowserAcceptHeader = true;//allows header instruction about formatting
@@ -54,6 +57,8 @@ builder.Services.AddControllers(config =>
     .AddXmlDataContractSerializerFormatters() //allow xml formatting
     .AddCustomCsvFormatter() //allow custom csv formatting
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); //for api to know where to route incoming requests
+
+builder.Services.AddCustomMediaTypes();
 
 
 // Configure the HTTP request pipeline.     = Configure method in .Net 5 (add middleware)
