@@ -13,6 +13,12 @@ namespace Presentation.Controllers
         private readonly IServiceManager _service;
         public CompaniesController(IServiceManager service) => _service = service; //ctor!
 
+        [HttpOptions]
+        public IActionResult GetCompaniesOptions()
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, DELETE");
+            return Ok();
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetCompanies() //IActionResult returns retVal + status code
