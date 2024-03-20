@@ -20,7 +20,7 @@ namespace Presentation.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies")]
         public async Task<IActionResult> GetCompanies() //IActionResult returns retVal + status code
         {
             var companies = await _service.CompanyService.GetAllCompaniesAsync(trackChanges: false);
@@ -34,7 +34,7 @@ namespace Presentation.Controllers
             return Ok(company);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateCompany")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto? company)
         {
